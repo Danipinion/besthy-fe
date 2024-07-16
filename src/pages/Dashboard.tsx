@@ -1,23 +1,37 @@
 import { Button } from "@/components/ui/button";
 import MainLayout from "@/layouts/MainLayout";
-import { Headset, HeartPulse, MessageCircleWarning } from "lucide-react";
+import {
+  AudioLines,
+  Headset,
+  HeartPulse,
+  MessageCircleWarning,
+  Users,
+} from "lucide-react";
 
 const Dashboard = () => {
   return (
     <MainLayout>
       <div>
-        <div className="bg-white w-full h-[62vh] absolute bottom-0 rounded-t-[50px] px-5 py-5">
+        <div className="bg-white w-full h-[55vh] absolute bottom-0 rounded-t-[50px] px-10 py-10">
           <Button className="w-full my-3 shadow-md justify-start gap-2 h-14 text-xl">
-            <MessageCircleWarning className="h-12 w-12" />
+            <MessageCircleWarning className="h-9 w-9" />
             Laporan
           </Button>
           <Button className="w-full my-3 shadow-md justify-start gap-2 h-14 text-xl">
-            <Headset className="h-12 w-12" />
+            <AudioLines className="h-9 w-9" />
+            Detak Jantung
+          </Button>
+          <Button className="w-full my-3 shadow-md justify-start gap-2 h-14 text-xl">
+            <Headset className="h-9 w-9" />
             Konsultasi
           </Button>
           <Button className="w-full my-3 shadow-md justify-start gap-2 h-14 text-xl">
-            <HeartPulse className="h-12 w-12" />
+            <HeartPulse className="h-9 w-9" />
             Detak Jantung
+          </Button>
+          <Button className="w-full my-3 shadow-md justify-start gap-2 h-14 text-xl">
+            <Users className="h-9 w-9" />
+            Komunitas
           </Button>
         </div>
       </div>

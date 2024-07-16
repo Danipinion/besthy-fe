@@ -26,7 +26,9 @@ const Login = () => {
             </div>
 
             <div>
-              <Button className="w-full my-2 shadow-md">Login</Button>
+              <Link to="/dashboard">
+                <Button className="w-full my-2 shadow-md">Login</Button>
+              </Link>
             </div>
             <div>
               <p className="text-white text-sm text-center font-light">
