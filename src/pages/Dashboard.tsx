@@ -7,6 +7,7 @@ import {
   MessageCircleWarning,
   Users,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   return (
@@ -18,8 +19,13 @@ const Dashboard = () => {
             Laporan
           </Button>
           <Button className="w-full my-3 shadow-md justify-start gap-2 h-14 text-xl">
-            <AudioLines className="h-9 w-9" />
-            Detak Jantung
+            <Link
+              to={"/user/detakJantung"}
+              className="flex gap-2 items-center  w-full"
+            >
+              <AudioLines className="h-9 w-9" />
+              Detak Jantung
+            </Link>
           </Button>
           <Button className="w-full my-3 shadow-md justify-start gap-2 h-14 text-xl">
             <Headset className="h-9 w-9" />

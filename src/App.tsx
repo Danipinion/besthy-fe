@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Laporan from "./pages/Laporan";
 import ChatBot from "./pages/ChatBot";
+import DetakJantung from "./pages/DetakJantung";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/user/profile" element={<Profile />} />
         <Route path="/user/laporan" element={<Laporan />} />
         <Route path="/user/chatbot" element={<ChatBot />} />
+        <Route path="/user/detakJantung" element={<DetakJantung />} />
       </Routes>
     </BrowserRouter>
   );
