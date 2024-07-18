@@ -75,3 +75,7 @@
     /* background-size: cover; */
   }
 }
+
+.full-page-chat-red div div div {
+  color: red;
+}
