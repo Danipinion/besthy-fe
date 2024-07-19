@@ -1,5 +1,5 @@
 import { BubbleChat } from "flowise-embed-react";
-import { Bot, Home, User } from "lucide-react";
+import { Home, User } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 const BottomNav = () => {

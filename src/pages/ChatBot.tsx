@@ -1,5 +1,5 @@
 // import MainLayout from "@/layouts/MainLayout";
-import { BubbleChat, FullPageChat } from "flowise-embed-react";
+import { BubbleChat } from "flowise-embed-react";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
