@@ -1,11 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
-import Profile from "./pages/Profile";
-import Laporan from "./pages/Laporan";
-import ChatBot from "./pages/ChatBot";
 import DetakJantung from "./pages/DetakJantung";
+import Laporan from "./pages/Laporan";
+import Login from "./pages/Login";
+import Profile from "./pages/Profile";
+import Register from "./pages/Register";
 
 const App = () => {
   return (
