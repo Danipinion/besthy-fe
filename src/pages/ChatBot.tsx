@@ -1,15 +1,14 @@
 // import MainLayout from "@/layouts/MainLayout";
-import { FullPageChat } from "flowise-embed-react";
+import { BubbleChat, FullPageChat } from "flowise-embed-react";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const ChatBot = () => {
   return (
     <>
-      <FullPageChat
+      <BubbleChat
         chatflowid="a50759ea-9d7e-49fc-932e-3a0d144dc7d5"
         apiHost="http://192.168.24.106:3000"
-        className="full-page-chat-red"
       />
       <Link to={"/dashboard"} className="p-3 absolute top-0 z-[1000]">
         <ArrowLeft />

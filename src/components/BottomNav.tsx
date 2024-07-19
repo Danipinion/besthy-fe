@@ -1,3 +1,4 @@
+import { BubbleChat } from "flowise-embed-react";
 import { Bot, Home, User } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
@@ -7,15 +8,6 @@ const BottomNav = () => {
   return (
     <div>
       <div className="w-full h-16 fixed bottom-0 bg-primary text-white flex items-center justify-around">
-        <NavLink
-          to={"/user/chatbot"}
-          className={`items-center justify-center flex flex-col  ${
-            active == "/user/chatbot" ? "text-white" : "text-gray-300"
-          }`}
-        >
-          <Bot />
-          <p>Chat Bot</p>
-        </NavLink>
         <NavLink
           to={"/dashboard"}
           className={`items-center justify-center flex flex-col  ${
@@ -34,6 +26,51 @@ const BottomNav = () => {
           <User />
           <p>Profile</p>
         </NavLink>
+        <div className="relative">
+          <BubbleChat
+            chatflowid="a50759ea-9d7e-49fc-932e-3a0d144dc7d5"
+            apiHost="http://192.168.24.106:3000"
+            theme={{
+              button: {
+                backgroundColor: "#7c3aed",
+                right: 20,
+                bottom: 12,
+                size: "medium",
+                iconColor: "white",
+                customIconSrc:
+                  "https://cdn.icon-icons.com/icons2/3403/PNG/64/bot_icon_215703.png",
+              },
+              chatWindow: {
+                welcomeMessage: "hai!, apa yang bisa saya bantu",
+                backgroundColor: "#ffffff",
+                height: 700,
+                width: 400,
+                fontSize: 16,
+                poweredByTextColor: "#ffffff",
+                botMessage: {
+                  backgroundColor: "#f7f8ff",
+                  textColor: "#303235",
+                  showAvatar: false,
+                  avatarSrc:
+                    "https://raw.githubusercontent.com/zahidkhawaja/langchain-chat-nextjs/main/public/parroticon.png",
+                },
+                userMessage: {
+                  backgroundColor: "#f8a2fb",
+                  textColor: "#504e4e",
+                  showAvatar: false,
+                  avatarSrc:
+                    "https://raw.githubusercontent.com/zahidkhawaja/langchain-chat-nextjs/main/public/usericon.png",
+                },
+                textInput: {
+                  placeholder: "Tuliskan Masalahmu",
+                  backgroundColor: "#ffffff",
+                  textColor: "#000000",
+                  sendButtonColor: "#b402ba",
+                },
+              },
+            }}
+          />
+        </div>
       </div>
     </div>
   );
