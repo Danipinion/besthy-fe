@@ -40,7 +40,8 @@ const BottomNav = () => {
                   "https://cdn.icon-icons.com/icons2/3403/PNG/64/bot_icon_215703.png",
               },
               chatWindow: {
-                welcomeMessage: "hai!, apa yang bisa saya bantu",
+                welcomeMessage:
+                  "Ada yang bisa Clara bantu? curhat sama Clara yuk!! ",
                 backgroundColor: "#ffffff",
                 height: 700,
                 width: 400,

@@ -21,7 +21,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="bg-white w-full h-[70vh] absolute bottom-0 rounded-t-[50px] px-10 py-10">
-          <Link to={"/user/psikotes"}>
+          <Link to={"/user/pra-psikotes"}>
             <Button className="w-full my-3 shadow-md justify-start gap-2 h-14 text-xl">
               <BookOpenCheck className="h-9 w-9" />
               Tes Kepribadian
