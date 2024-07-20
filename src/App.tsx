@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import Psikoter from "./pages/Psikoter";
 import About from "./pages/About";
 import PraPsikotes from "./pages/PraPsikotes";
+import GameMenu from "./pages/GameMenu";
 
 const App = () => {
   return (
@@ -21,6 +22,9 @@ const App = () => {
         <Route path="/user/pra-psikotes" element={<PraPsikotes />} />
         <Route path="/user/psikotes" element={<Psikoter />} />
         <Route path="/user/detakJantung" element={<DetakJantung />} />
+        <Route path="/user/game-menu" element={<GameMenu />} />
+        <Route path="/game/tetris" element={<GameMenu />} />
+        <Route path="/game/dino" element={<GameMenu />} />
         <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>
