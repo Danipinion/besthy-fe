@@ -5,6 +5,7 @@ import Laporan from "./pages/Laporan";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
+import Psikoter from "./pages/Psikoter";
 
 const App = () => {
   return (
@@ -15,7 +16,7 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/user/profile" element={<Profile />} />
         <Route path="/user/laporan" element={<Laporan />} />
-        {/* <Route path="/user/chatbot" element={<ChatBot />} /> */}
+        <Route path="/user/psikotes" element={<Psikoter />} />
         <Route path="/user/detakJantung" element={<DetakJantung />} />
       </Routes>
     </BrowserRouter>
