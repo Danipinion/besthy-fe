@@ -285,12 +285,13 @@ export default function Psikoter() {
       {showScore ? (
         <>
           <div className="bg-white m-5 p-3 rounded-md text-center">
-            Kamu punya kepribadian{" "}
+            Kamu punya kepribadian
+            <br />
             <span className="text-3xl font-bold ">{hasilPsikotes}</span>
           </div>
           <div className="w-full">
             <Link to="/dashboard" className="text-center w-full mx-5">
-              <Button>Mulai</Button>
+              <Button>Kembali</Button>
             </Link>
           </div>
         </>

@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 
 const BottomNav = () => {
   const active = window.location.pathname;
-
   return (
     <div>
       <div className="w-full h-16 fixed bottom-0 bg-primary text-white flex items-center justify-around">
