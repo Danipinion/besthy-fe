@@ -75,6 +75,11 @@ const Profile = () => {
             <Link to={"/"}>
               <Button className="mt-5 w-full">Logout</Button>
             </Link>
+            <Link to={"/about"} className="mt-5">
+              <p className="mt-10 text-center font-light hover:underline">
+                About us
+              </p>
+            </Link>
           </div>
         </div>
       </div>

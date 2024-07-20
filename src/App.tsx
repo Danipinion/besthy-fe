@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import Psikoter from "./pages/Psikoter";
+import About from "./pages/About";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/user/laporan" element={<Laporan />} />
         <Route path="/user/psikotes" element={<Psikoter />} />
         <Route path="/user/detakJantung" element={<DetakJantung />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>
   );
