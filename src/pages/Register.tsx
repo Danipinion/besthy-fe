@@ -1,7 +1,24 @@
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confPassword, setConfPassword] = useState("");
+  const navigate = useNavigate();
+  const Auth = async (e: any) => {
+    e.preventDefault();
+    await axios.post("http://localhost:3002/users", {
+      name,
+      email,
+      password,
+      confPassword,
+    });
+    navigate("/");
+  };
   return (
     <>
       <div className="flex flex-col w-full  h-screen items-center justify-center text-white">
@@ -9,12 +26,23 @@ const Register = () => {
           <h1 className="text-3xl font-bold mb-3">Daftar</h1>
         </div>
         <div className="text-black">
-          <form className="flex flex-col gap-2">
+          <form onSubmit={Auth} className="flex flex-col gap-2">
             <div>
               <input
                 type="text"
                 className="w-60 h-12 px-2 border-2 rounded-lg placeholder:text-sm"
-                placeholder="Username or Email"
+                placeholder="Username"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                className="w-60 h-12 px-2 border-2 rounded-lg placeholder:text-sm"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
@@ -22,6 +50,8 @@ const Register = () => {
                 type="password"
                 className="w-60 h-12 px-2 border-2 rounded-lg placeholder:text-sm"
                 placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div>
@@ -29,10 +59,14 @@ const Register = () => {
                 type="password"
                 className="w-60 h-12 px-2 border-2 rounded-lg placeholder:text-sm"
                 placeholder="Ulangi Password"
+                value={confPassword}
+                onChange={(e) => setConfPassword(e.target.value)}
               />
             </div>
             <div>
-              <Button className="w-full my-2 shadow-md">DAFTAR</Button>
+              <Button type="submit" className="w-full my-2 shadow-md">
+                DAFTAR
+              </Button>
             </div>
             <div>
               <p className="text-white text-sm text-center font-light">

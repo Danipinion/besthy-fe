@@ -1,10 +1,26 @@
 import person from "@/assets/img/home.png";
 import { Button } from "@/components/ui/button";
+import { getMe } from "@/hooks/authSlice";
 import MainLayout from "@/layouts/MainLayout";
+import { AppDispatch } from "@/store";
 import { AudioLines, BookOpenCheck, Gamepad, Users } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+  const { isError } = useSelector((state: any) => state.auth);
+  useEffect(() => {
+    dispatch(getMe());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (isError) {
+      navigate("/");
+    }
+  }, [isError, navigate]);
   return (
     <MainLayout>
       <div>

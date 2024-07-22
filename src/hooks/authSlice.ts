@@ -1,0 +1,102 @@
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+
+const initialState = {
+  user: null,
+  isError: false,
+  isSuccess: false,
+  isLoading: false,
+  message: "",
+};
+
+export const LoginUser = createAsyncThunk(
+  "user/LoginUser",
+  async (user: { email: string; password: string }, thunkAPI) => {
+    try {
+      const response = await axios.post(
+        `https://besthy-be.vercel.app/auth/login`,
+        {
+          email: user.email,
+          password: user.password,
+        }
+      );
+      return response.data;
+    } catch (error: any) {
+      const message = error.response.data.msg;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const getMe = createAsyncThunk("user/getMe", async (_, thunkAPI) => {
+  try {
+    const response = await axios.get("https://besthy-be.vercel.app/auth/me");
+    return response.data;
+  } catch (error: any) {
+    const message = error.response.data.msg;
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+export const LogOut = createAsyncThunk("user/LogOut", async () => {
+  await axios.delete("https://besthy-be.vercel.app/auth/logout");
+});
+
+export const authSlice = createSlice({
+  name: "auth",
+  initialState,
+  reducers: {
+    reset: (state) => {
+      // Reset state to initial state
+      state.user = null;
+      state.isError = false;
+      state.isSuccess = false;
+      state.isLoading = false;
+      state.message = "";
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(LoginUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(LoginUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = action.payload;
+      })
+      .addCase(LoginUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload as string;
+      });
+    // Get User Login
+    builder
+      .addCase(getMe.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getMe.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = action.payload;
+      })
+      .addCase(getMe.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload as string;
+      });
+    // Logout
+    builder
+      .addCase(LogOut.fulfilled, (state) => {
+        state.user = null;
+        state.isSuccess = false;
+      })
+      .addCase(LogOut.rejected, (state, action) => {
+        state.isError = true;
+        state.message = action.payload as string;
+      });
+  },
+});
+
+export const { reset } = authSlice.actions;
+export default authSlice.reducer;
