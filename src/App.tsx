@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import Psikoter from "./pages/Psikoter";
 import About from "./pages/About";
 import PraPsikotes from "./pages/PraPsikotes";
+import Komunitas from "./pages/Komunitas";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/user/pra-psikotes" element={<PraPsikotes />} />
         <Route path="/user/psikotes" element={<Psikoter />} />
         <Route path="/user/detakJantung" element={<DetakJantung />} />
+        <Route path="/user/komunitas" element={<Komunitas />} />
         <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>
