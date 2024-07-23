@@ -21,6 +21,13 @@ const Login = () => {
     dispatch(reset());
   }, [user, isSuccess, dispatch, navigate]);
 
+  const userId = localStorage.getItem("userId");
+  useEffect(() => {
+    if (userId) {
+      navigate("/dashboard");
+    }
+  });
+
   const Auth = (e: any) => {
     e.preventDefault();
     dispatch(LoginUser({ email, password }));

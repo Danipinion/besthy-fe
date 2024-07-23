@@ -13,13 +13,12 @@ export const LoginUser = createAsyncThunk(
   "user/LoginUser",
   async (user: { email: string; password: string }, thunkAPI) => {
     try {
-      const response = await axios.post(
-        `https://besthy-be.vercel.app/auth/login`,
-        {
-          email: user.email,
-          password: user.password,
-        }
-      );
+      const response = await axios.post(`http://localhost:3002/auth/login`, {
+        email: user.email,
+        password: user.password,
+      });
+      // Save user id to localStorage
+      localStorage.setItem("userId", response.data.id);
       return response.data;
     } catch (error: any) {
       const message = error.response.data.msg;
@@ -30,7 +29,12 @@ export const LoginUser = createAsyncThunk(
 
 export const getMe = createAsyncThunk("user/getMe", async (_, thunkAPI) => {
   try {
-    const response = await axios.get("https://besthy-be.vercel.app/auth/me");
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      return thunkAPI.rejectWithValue("No user ID found in local storage");
+    }
+
+    const response = await axios.get(`http://localhost:3002/auth/me/${userId}`);
     return response.data;
   } catch (error: any) {
     const message = error.response.data.msg;
@@ -39,7 +43,9 @@ export const getMe = createAsyncThunk("user/getMe", async (_, thunkAPI) => {
 });
 
 export const LogOut = createAsyncThunk("user/LogOut", async () => {
-  await axios.delete("https://besthy-be.vercel.app/auth/logout");
+  await axios.delete("http://localhost:3002/auth/logout");
+  // Remove user id from localStorage
+  localStorage.removeItem("userId");
 });
 
 export const authSlice = createSlice({

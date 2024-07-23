@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -9,6 +9,12 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
   const navigate = useNavigate();
+  const userId = localStorage.getItem("userId");
+  useEffect(() => {
+    if (userId) {
+      navigate("/dashboard");
+    }
+  });
   const Auth = async (e: any) => {
     e.preventDefault();
     await axios.post("http://localhost:3002/users", {

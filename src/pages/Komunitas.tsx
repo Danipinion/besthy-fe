@@ -5,9 +5,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import useSWR, { mutate } from "swr";
 
 const Komunitas = () => {
-  const [messages, setMessages] = useState([]);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const { user, isError } = useSelector((state: any) => state.auth);
@@ -21,25 +21,30 @@ const Komunitas = () => {
     }
   }, [isError, navigate]);
   const [sendMessage, setSendMessage] = useState("");
-  useEffect(() => {
-    getMessage();
-  }, []);
+
   const getMessage = async () => {
     const response = await axios.get("http://localhost:3002/message");
-    setMessages(response.data);
+    return response.data;
   };
+
+  const { data, error } = useSWR("message", getMessage, {
+    refreshInterval: 5000, // Polling interval in milliseconds (5 seconds)
+  });
+  if (error) return <h2>Failed to load messages</h2>;
+  if (!data) return <h2>Loading...</h2>;
 
   const handleSendMessage = async () => {
     await axios.post("http://localhost:3002/message", {
       text: sendMessage,
     });
-    getMessage();
+    mutate("http://localhost:3002/message");
+    setSendMessage("");
   };
   return (
     <MainLayout>
       <h1 className="text-3xl font-bold py-5 text-center">Komunitas</h1>
       <div className="w-full px-5 overflow-y-auto h-[70vh]">
-        {messages.map((message: any, index: any) => {
+        {data.map((message: any, index: any) => {
           return (
             <div
               className={`flex gap-2.5 ${message?.user?.id === user?.id ? "justify-end" : "flex-start"}`}
