@@ -45,7 +45,7 @@ const Profile = () => {
   const Lengkap = async (e: any) => {
     e.preventDefault();
     const userId = localStorage.getItem("userId");
-    await axios.patch(`http://localhost:3002/users/profile/${userId}`, {
+    await axios.patch(`https://besthy-be.vercel.app/users/profile/${userId}`, {
       telp,
       jenisKelamin,
       birthdate,

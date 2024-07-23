@@ -23,7 +23,7 @@ const Komunitas = () => {
   const [sendMessage, setSendMessage] = useState("");
 
   const getMessage = async () => {
-    const response = await axios.get("http://localhost:3002/message");
+    const response = await axios.get("https://besthy-be.vercel.app/message");
     return response.data;
   };
 
@@ -36,10 +36,11 @@ const Komunitas = () => {
   if (!data) return <h2>Loading...</h2>;
 
   const handleSendMessage = async () => {
-    await axios.post("http://localhost:3002/message", {
+    const userId = localStorage.getItem("userId");
+    await axios.post(`https://besthy-be.vercel.app/message/${userId}`, {
       text: sendMessage,
     });
-    mutate("http://localhost:3002/message");
+    mutate("https://besthy-be.vercel.app/message");
     setSendMessage("");
   };
   return (
