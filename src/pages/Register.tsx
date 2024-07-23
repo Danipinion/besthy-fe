@@ -8,6 +8,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
   useEffect(() => {
@@ -17,6 +18,7 @@ const Register = () => {
   });
   const Auth = async (e: any) => {
     e.preventDefault();
+    setLoading(true);
     await axios.post("https://besthy-be.vercel.app/users", {
       name,
       email,
@@ -24,6 +26,7 @@ const Register = () => {
       confPassword,
     });
     navigate("/");
+    setLoading(false);
   };
   return (
     <>
@@ -71,7 +74,7 @@ const Register = () => {
             </div>
             <div>
               <Button type="submit" className="w-full my-2 shadow-md">
-                DAFTAR
+                {loading ? "Loading..." : "Daftar"}
               </Button>
             </div>
             <div>
