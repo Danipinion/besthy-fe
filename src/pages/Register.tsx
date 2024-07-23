@@ -17,7 +17,7 @@ const Register = () => {
   });
   const Auth = async (e: any) => {
     e.preventDefault();
-    await axios.post("http://localhost:3002/users", {
+    await axios.post("https://besthy-be.vercel.app/users", {
       name,
       email,
       password,
