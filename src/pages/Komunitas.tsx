@@ -30,7 +30,9 @@ const Komunitas = () => {
   const { data, error } = useSWR("message", getMessage, {
     refreshInterval: 5000, // Polling interval in milliseconds (5 seconds)
   });
-  if (error) return <h2>Failed to load messages</h2>;
+  if (error) {
+    localStorage.removeItem("userId");
+  }
   if (!data) return <h2>Loading...</h2>;
 
   const handleSendMessage = async () => {

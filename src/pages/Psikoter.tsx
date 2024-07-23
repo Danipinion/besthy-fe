@@ -293,6 +293,11 @@ export default function Psikoter() {
             <Link to="/dashboard" className="text-center w-full mx-5">
               <Button>Kembali</Button>
             </Link>
+            {/* <div className="p-3">
+              <div className="bg-gray-50 p-2 rounded-md">
+                <h1>tes</h1>
+              </div>
+            </div> */}
           </div>
         </>
       ) : (
@@ -306,13 +311,18 @@ export default function Psikoter() {
             </div>
           </div>
           <div className="answer-section flex flex-col text-white gap-5 mt-5">
-            {questions[currentQuestion].answerOptions.map((answerOption) => (
-              <Button
-                onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}
-              >
-                {answerOption.answerText}
-              </Button>
-            ))}
+            {questions[currentQuestion].answerOptions.map(
+              (answerOption, index) => (
+                <Button
+                  onClick={() =>
+                    handleAnswerOptionClick(answerOption.isCorrect)
+                  }
+                  key={index}
+                >
+                  {answerOption.answerText}
+                </Button>
+              )
+            )}
           </div>
         </div>
       )}
