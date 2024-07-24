@@ -2,7 +2,6 @@ import { getMe } from "@/hooks/authSlice";
 import instance from "@/instance";
 import MainLayout from "@/layouts/MainLayout";
 import { AppDispatch } from "@/store";
-import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";

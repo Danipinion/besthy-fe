@@ -1,6 +1,5 @@
 import instance from "@/instance";
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   user: null,
