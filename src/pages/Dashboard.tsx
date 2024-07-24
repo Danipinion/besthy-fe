@@ -55,7 +55,7 @@ const Dashboard = () => {
               Komunitas
             </Button>
           </Link>
-          <Link to={"/dashboard"}>
+          <Link to={"/user/game-menu"}>
             <Button className="w-full my-2 shadow-md justify-start gap-2 h-14 text-xl">
               <Gamepad className="h-9 w-9" />
               Games

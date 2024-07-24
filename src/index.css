@@ -79,3 +79,61 @@
 .full-page-chat-red div div div {
   color: red;
 }
+
+.dino {
+  width: 50px;
+  height: 50px;
+  background: gray; /* Ganti dengan gambar dino jika ada */
+  position: absolute;
+  bottom: 0;
+  left: 50px;
+  transition: transform 0.3s ease;
+}
+
+.dino.jump {
+  animation: jump 1s ease forwards; /* Durasi animasi lompatan */
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-150px); /* Ketinggian lompatan */
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.cactus {
+  width: 30px;
+  height: 50px;
+  background: green; /* Ganti dengan gambar kaktus jika ada */
+  position: absolute;
+  bottom: 0;
+}
+
+.game {
+  position: relative;
+  width: 100vw;
+  height: 90vh;
+  overflow: hidden;
+}
+
+.start-screen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: white;
+}
+
+.score {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 20px;
+  color: white;
+}

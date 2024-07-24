@@ -9,6 +9,8 @@ import Psikoter from "./pages/Psikoter";
 import About from "./pages/About";
 import PraPsikotes from "./pages/PraPsikotes";
 import Komunitas from "./pages/Komunitas";
+import Dino from "./pages/games/Dino";
+import GameMenu from "./pages/GameMenu";
 
 const App = () => {
   return (
@@ -23,6 +25,8 @@ const App = () => {
         <Route path="/user/psikotes" element={<Psikoter />} />
         <Route path="/user/detakJantung" element={<DetakJantung />} />
         <Route path="/user/komunitas" element={<Komunitas />} />
+        <Route path="/user/game-menu" element={<GameMenu />} />
+        <Route path="/game/dino" element={<Dino />} />
         <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>
