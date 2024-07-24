@@ -2,7 +2,7 @@ import { getMe } from "@/hooks/authSlice";
 import instance from "@/instance";
 import MainLayout from "@/layouts/MainLayout";
 import { AppDispatch } from "@/store";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import useSWR, { mutate } from "swr";
@@ -12,7 +12,7 @@ const Komunitas = () => {
   const navigate = useNavigate();
   const { user, isError } = useSelector((state: any) => state.auth);
   const [loading, setLoading] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     dispatch(getMe());
@@ -32,14 +32,15 @@ const Komunitas = () => {
   };
 
   const { data, error } = useSWR("message", getMessage, {
-    refreshInterval: 1000, // Polling interval in milliseconds (5 seconds)
+    refreshInterval: 1000, // Polling interval in milliseconds
   });
 
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
     }
-  }, [getMessage, sendMessage]);
+  }, [data, getMessage, sendMessage]); // Depend on `data` to trigger scroll when messages change
 
   if (error) {
     localStorage.removeItem("userId");
@@ -47,6 +48,11 @@ const Komunitas = () => {
   if (!data) return <h2>Loading...</h2>;
 
   const handleSendMessage = async () => {
+    if (!sendMessage.trim()) {
+      alert("Pesan tidak boleh kosong!");
+      return;
+    }
+
     const userId = localStorage.getItem("userId");
     setLoading(true);
     await instance.post(`/message/${userId}`, {
@@ -56,41 +62,39 @@ const Komunitas = () => {
     setLoading(false);
     setSendMessage("");
   };
+
   return (
     <MainLayout>
-      <h1 className="text-3xl font-bold py-5 text-center ">Komunitas</h1>
-      <div className="w-full px-5 overflow-y-auto h-[65vh]">
-        <div>
-          {data.map((message: any, index: any) => {
-            return (
-              <div
-                className={`flex gap-2.5 ${message?.user?.id === user?.id ? "justify-end" : "flex-start"}`}
-                key={index}
-              >
-                <div className="">
-                  <div className="grid mb-2">
-                    <h5
-                      className={`${message?.user?.name === user?.name ? "text-right" : "text-left-start"} text-sm font-semibold leading-snug pb-1  `}
-                    >
-                      {message?.user?.name}
-                    </h5>
-                    <div
-                      className={`px-3 py-2 ${message?.user?.id === user?.id ? "bg-indigo-600 text-white" : "bg-gray-200 text-black"} rounded`}
-                    >
-                      <h2 className=" text-sm font-normal leading-snug">
-                        {message?.text}
-                      </h2>
-                    </div>
+      <h1 className="text-3xl font-bold py-5 text-center">Komunitas</h1>
+      <div className="w-full px-5 chat-container" ref={chatContainerRef}>
+        <div className="chat-messages">
+          {data.map((message: any, index: any) => (
+            <div
+              className={`flex gap-2.5 ${message?.user?.id === user?.id ? "justify-end" : "flex-start"}`}
+              key={index}
+            >
+              <div>
+                <div className="grid mb-2">
+                  <h5
+                    className={`${message?.user?.name === user?.name ? "text-right" : "text-left"} text-sm font-semibold leading-snug pb-1`}
+                  >
+                    {message?.user?.name}
+                  </h5>
+                  <div
+                    className={`px-3 py-2 ${message?.user?.id === user?.id ? "bg-indigo-600 text-white" : "bg-gray-200 text-black"} rounded`}
+                  >
+                    <h2 className="text-sm font-normal leading-snug">
+                      {message?.text}
+                    </h2>
                   </div>
                 </div>
               </div>
-            );
-          })}
-          <div ref={messagesEndRef}></div>
+            </div>
+          ))}
         </div>
         {/*  CHAT END */}
 
-        <div className="w-[90vw] pl-3 pr-1 py-1 rounded-3xl border bg-gray-200 border-gray-200 items-center gap-2 inline-flex justify-between absolute bottom-10 z-10">
+        <div className="w-[90vw] pl-3 pr-1 py-1 rounded-3xl border bg-gray-200 border-gray-200 items-center gap-2 inline-flex justify-between absolute bottom-20 z-10">
           <div className="flex items-center gap-2">
             <input
               className="grow shrink basis-0 text-black text-xs font-medium leading-4 focus:outline-none bg-gray-200 py-2"
@@ -101,7 +105,7 @@ const Komunitas = () => {
           </div>
           <div className="flex items-center gap-2">
             <button
-              className="items-center flex px-3 py-2 bg-indigo-600 rounded-full shadow "
+              className="items-center flex px-3 py-2 bg-indigo-600 rounded-full shadow"
               onClick={handleSendMessage}
             >
               {loading ? (
