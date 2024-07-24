@@ -11,6 +11,7 @@ import PraPsikotes from "./pages/PraPsikotes";
 import Komunitas from "./pages/Komunitas";
 import Dino from "./pages/games/Dino";
 import GameMenu from "./pages/GameMenu";
+import Music from "./pages/Music";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/user/profile" element={<Profile />} />
+        <Route path="/user/musik" element={<Music />} />
         <Route path="/user/laporan" element={<Laporan />} />
         <Route path="/user/pra-psikotes" element={<PraPsikotes />} />
         <Route path="/user/psikotes" element={<Psikoter />} />
