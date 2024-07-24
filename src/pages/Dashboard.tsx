@@ -31,32 +31,32 @@ const Dashboard = () => {
           </div>
           <div className="realtive w-full">
             <img src={person} alt="" className="w-[20vh] -mx-10" />
-            <p className="text- sm:xl font-bold text-black bg-slate-100 p-2 absolute top-44  right-5 z-10 w-3/5 rounded-md">
+            <p className="text- sm:xl font-bold text-black bg-slate-100 p-2 absolute top-40  right-5 z-10 w-3/5 rounded-md">
               Hallo Aku Clara, ada yang bisa saya bantu?
             </p>
           </div>
         </div>
-        <div className="bg-white w-full h-[70vh] absolute bottom-0 rounded-t-[50px] px-10 py-10">
+        <div className="bg-white w-full h-[60vh] absolute bottom-0 rounded-t-[50px] px-10 py-2">
           <Link to={"/user/pra-psikotes"}>
-            <Button className="w-full my-3 shadow-md justify-start gap-2 h-14 text-xl">
+            <Button className="w-full my-2 shadow-md justify-start gap-2 h-14 text-xl">
               <BookOpenCheck className="h-9 w-9" />
               Tes Kepribadian
             </Button>
           </Link>
           <Link to={"/user/detakJantung"}>
-            <Button className="w-full my-3 shadow-md justify-start gap-2 h-14 text-xl">
+            <Button className="w-full my-2 shadow-md justify-start gap-2 h-14 text-xl">
               <AudioLines className="h-9 w-9" />
               Detak Jantung
             </Button>
           </Link>
           <Link to={"/user/komunitas"}>
-            <Button className="w-full my-3 shadow-md justify-start gap-2 h-14 text-xl">
+            <Button className="w-full my-2 shadow-md justify-start gap-2 h-14 text-xl">
               <Users className="h-9 w-9" />
               Komunitas
             </Button>
           </Link>
           <Link to={"/dashboard"}>
-            <Button className="w-full my-3 shadow-md justify-start gap-2 h-14 text-xl">
+            <Button className="w-full my-2 shadow-md justify-start gap-2 h-14 text-xl">
               <Gamepad className="h-9 w-9" />
               Games
             </Button>

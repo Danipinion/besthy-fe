@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import axios from "axios";
+import instance from "@/instance";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -19,7 +19,7 @@ const Register = () => {
   const Auth = async (e: any) => {
     e.preventDefault();
     setLoading(true);
-    await axios.post("https://besthy-be.vercel.app/users", {
+    await instance.post("/users", {
       name,
       email,
       password,

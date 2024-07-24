@@ -11,14 +11,15 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { getMe, LogOut, reset } from "@/hooks/authSlice";
+import instance from "@/instance";
 import MainLayout from "@/layouts/MainLayout";
 import { AppDispatch } from "@/store";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const [loading, setLoading] = useState(false);
   const [telp, setTelp] = useState("");
   const [jenisKelamin, setJenisKelamin] = useState("");
   const [birthdate, setBirthdate] = useState("");
@@ -44,20 +45,22 @@ const Profile = () => {
 
   const Lengkap = async (e: any) => {
     e.preventDefault();
+    setLoading(true);
     const userId = localStorage.getItem("userId");
-    await axios.patch(`https://besthy-be.vercel.app/users/profile/${userId}`, {
+    await instance.patch(`/users/profile/${userId}`, {
       telp,
       jenisKelamin,
       birthdate,
     });
-    navigate("/user/profile");
+    setLoading(false);
+    window.location.reload();
   };
 
   return (
     <MainLayout>
       <div className="font-bold px-2 py-2">
         <h1 className="ml-10 text-3xl">Profile</h1>
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify- h-[80vh] overflow-y-auto">
           <div className="h-full w-4/5 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 relative mt-10 flex flex-col items-center justify-center px-5 py-5">
             <Avatar className="rounded-full w-20 h-20 absolute -top-10">
               <AvatarImage src="https://github.com/shadcn.png" />
@@ -167,7 +170,7 @@ const Profile = () => {
                 </DialogHeader>
                 <DialogFooter>
                   <Button type="submit" onClick={Lengkap}>
-                    Save changes
+                    {loading ? "Loading..." : "Update"}
                   </Button>
                 </DialogFooter>
               </DialogContent>

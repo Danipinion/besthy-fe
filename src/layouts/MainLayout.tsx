@@ -1,5 +1,6 @@
 import BottomNav from "@/components/BottomNav";
 import Navbar from "@/components/Navbar";
+import ResponsiveWrapper from "@/components/ResponsiveWrapper";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -13,9 +14,11 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   }, [navigate]);
   return (
     <>
-      <Navbar />
-      <div className="mt-12 text-white">{children}</div>
-      <BottomNav />
+      <ResponsiveWrapper>
+        <Navbar />
+        <div className="mt-12 text-white ">{children}</div>
+        <BottomNav />
+      </ResponsiveWrapper>
     </>
   );
 };

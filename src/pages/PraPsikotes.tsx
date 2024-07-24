@@ -8,13 +8,13 @@ const PraPsikotes = () => {
     <MainLayout>
       <div className="px-5">
         <div className="realtive w-full  ">
-          <img src={person} alt="" className="w-[20vh] -mx-10" />
-          <p className="text- sm:xl font-bold text-black bg-slate-100 p-2 absolute top-24  right-5 z-10 w-3/5 rounded-md">
+          <img src={person} alt="" className="w-[20vh] -mx-2" />
+          <p className="text- sm:xl font-bold text-black bg-slate-100 p-2 absolute top-20 right-5 z-10 w-3/5 rounded-md">
             Silahkan mengerjakan Psikotes, kerjakan dengan baik ya :)
           </p>
         </div>
-        <div className="h-full w-full  text-black bg-gray-100 rounded-xl border border-gray-100 p-5 px-10 text-left text-sm">
-          <h1 className="text-3xl font-bold mb-2 text-center">Pra Psikotes</h1>
+        <div className="h-[50vh] overflow-y-auto  w-full  text-black bg-gray-100 rounded-xl border border-gray-100 p-5 px-10 text-left text-sm">
+          <h1 className="text-2xl font-bold mb-2 text-center">Pra Psikotes</h1>
           <p>
             Jadilah diri Anda sepenuhnya dan beri jawaban sejujurnya untuk
             mengetahui tipe kepribadian Anda. Pelajari cara tipe kepribadian
