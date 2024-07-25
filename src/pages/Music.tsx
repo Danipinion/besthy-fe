@@ -104,7 +104,7 @@ const Music: React.FC = () => {
   };
 
   return (
-    <>
+    <MainLayout>
       <div className="p-3 px-10">
         <h1 className="text-3xl font-bold mb-2">Entertainment</h1>
         <div className="bg-gray-50 w-full p-3 mb-5 text-primary rounded-md">
@@ -162,7 +162,7 @@ const Music: React.FC = () => {
           </div>
         </div>
       </div>
-    </>
+    </MainLayout>
   );
 };
 
