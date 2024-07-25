@@ -293,11 +293,45 @@ export default function Psikoter() {
             <Link to="/dashboard" className="text-center w-full mx-5">
               <Button>Kembali</Button>
             </Link>
-            {/* <div className="p-3">
-              <div className="bg-gray-50 p-2 rounded-md">
-                <h1>tes</h1>
+            <div className="p-3">
+              <div className="bg-gray-50 p-2 rounded-xl h-[60vh] overflow-y-auto">
+                <div>
+                  <span className="font-bold">1. Type = SANGUIS </span>
+                  Bersemangat dalam hidup, selalu ceria,hangat, bersahabat,
+                  mudah menerima kesan dari luar, mengutamakan perasaan
+                  ketimbang pikiran, tidak mau bersedih berlama lama, suka
+                  bicara, mudah menularkan perasaan ke orang lain, bersuara
+                  keras, ramah, tampak percaya diri dari sebenarnya
+                </div>
+                <div>
+                  <span className="font-bold">2. Type = KOLERIS</span>{" "}
+                  Berkemauan keras, aktif, praktis, cekatan, sangat independen,
+                  tegas, berpendirian keras dalam mengambil keputusan, suka
+                  beraktivitas, idenya tak pernah berakir,,
+                  rancangan,sasaran,ambisi, tidak menyerah terhadap tekanan
+                  orang lain, tapi tidak mudah bersimpati atau mengekpresikan
+                  perasaan, tidak peka kebutuhan orang lain. Cenderung memiliki
+                  jiwa kepemimpinan yang kuat
+                </div>
+                <div>
+                  <span className="font-bold">3. Type = MELANKOLIS</span>{" "}
+                  Berjiwa seni tinggi,analitis kuat, perfeksionis,
+                  sensitif,berbakat,rela berkorban, cenderung introvet, jika
+                  sudah dipuncak sukacita bisa jadi extrovet, menyalahkan diri
+                  sendiri,rendah diri, sekali memilih sesuatu mereka akan setia
+                  mengerjakannya
+                </div>
+                <div>
+                  <span className="font-bold">4. Type = PHLEGMATIS </span>Sifat
+                  alamiah pendamai, mudah bergaul, ramah menyenangkan. Bisa
+                  membuat sekelompok orang tertawa terbahak bahak karena
+                  humor-humor keringnya, tapi mereka tidak tertawa. Konsisten,
+                  tenang dan jarang terpengaruh oleh lingkungan. Orang
+                  phlegmatis cenderung menarik diri dari segala macam
+                  keterlibatan
+                </div>
               </div>
-            </div> */}
+            </div>
           </div>
         </>
       ) : (
