@@ -28,7 +28,7 @@ const BottomNav = () => {
         <div className="relative">
           <BubbleChat
             chatflowid="a50759ea-9d7e-49fc-932e-3a0d144dc7d5"
-            apiHost="http://192.168.24.106:3000"
+            apiHost="http://103.247.12.9:3000"
             theme={{
               button: {
                 backgroundColor: "#7c3aed",
