@@ -94,7 +94,7 @@ const Komunitas = () => {
         </div>
         {/*  CHAT END */}
 
-        <div className="w-[90vw] pl-3 pr-1 py-1 rounded-3xl border bg-gray-200 border-gray-200 items-center gap-2 inline-flex justify-between absolute bottom-20 z-10">
+        <div className="w-[90vw] pl-3 pr-1 py-1 rounded-3xl border bg-gray-200 border-gray-200 items-center gap-2 inline-flex justify-between fixed bottom-20 z-10">
           <div className="flex items-center gap-2">
             <input
               className="grow shrink basis-0 text-black text-xs font-medium leading-4 focus:outline-none bg-gray-200 py-2"

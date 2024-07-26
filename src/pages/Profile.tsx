@@ -180,7 +180,7 @@ const Profile = () => {
               Logout
             </Button>
             <Link to={"/about"} className="">
-              <p className=" mt-3 mb-10 text-center font-light hover:underline">
+              <p className=" mt-3 mb-20 text-center font-light hover:underline">
                 About us
               </p>
             </Link>
