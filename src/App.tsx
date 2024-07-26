@@ -12,6 +12,7 @@ import Komunitas from "./pages/Komunitas";
 import Dino from "./pages/games/Dino";
 import GameMenu from "./pages/GameMenu";
 import Music from "./pages/Music";
+import Chatbot from "./pages/Chatbot";
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/user/komunitas" element={<Komunitas />} />
         <Route path="/user/game-menu" element={<GameMenu />} />
         <Route path="/game/dino" element={<Dino />} />
+        <Route path="/chatbot" element={<Chatbot />} />
         <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>

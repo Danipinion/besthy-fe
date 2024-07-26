@@ -25,7 +25,16 @@ const BottomNav = () => {
           <User />
           <p>Profile</p>
         </NavLink>
-        <div className="relative">
+        <NavLink
+          to={"/chatbot"}
+          className={`items-center justify-center flex flex-col ${
+            active === "/chatbot" ? "text-white" : "text-gray-300"
+          }`}
+        >
+          <User />
+          <p>ChatBot</p>
+        </NavLink>
+        {/* <div className="relative">
           <BubbleChat
             chatflowid="a50759ea-9d7e-49fc-932e-3a0d144dc7d5"
             apiHost="http://103.247.12.9:3000"
@@ -70,7 +79,7 @@ const BottomNav = () => {
               },
             }}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );
