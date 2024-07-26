@@ -1,4 +1,4 @@
-import { Disc3, Settings } from "lucide-react";
+import { Disc3 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
