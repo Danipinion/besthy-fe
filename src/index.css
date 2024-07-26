@@ -151,3 +151,93 @@
   display: flex;
   flex-direction: column;
 }
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+  position: relative;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background: #b4b2b2;
+  border-radius: 10px;
+  height: 10px;
+  position: relative;
+}
+
+input[type="range"]::before {
+  content: "";
+  height: 10px;
+  background-color: #7c3aed;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 10px;
+  z-index: 1;
+  width: 0%; /* Will be set by JavaScript */
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -7px; /* Centers thumb on the track */
+  background-color: #7c3aed;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 50%;
+  z-index: 2;
+  position: relative;
+}
+
+/* For Firefox */
+input[type="range"]::-moz-range-track {
+  background: #b4b2b2;
+  border-radius: 10px;
+  height: 10px;
+  position: relative;
+}
+
+input[type="range"]::-moz-range-thumb {
+  background-color: #7c3aed;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 50%;
+  position: relative;
+  z-index: 2;
+}
+
+/* For IE */
+input[type="range"]::-ms-track {
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+  width: 100%;
+  height: 10px;
+}
+
+input[type="range"]::-ms-fill-lower {
+  background: #7c3aed;
+  border-radius: 10px;
+}
+
+input[type="range"]::-ms-fill-upper {
+  background: #b4b2b2;
+  border-radius: 10px;
+}
+
+input[type="range"]::-ms-thumb {
+  background-color: #7c3aed;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 50%;
+  margin-top: 0;
+  position: relative;
+  z-index: 2;
+}
+
+input[type="range"]::before {
+  width: var(--slider-progress, 0%);
+}

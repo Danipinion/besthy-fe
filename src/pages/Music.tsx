@@ -4,8 +4,15 @@ import laguPertama from "@/assets/music/bethovenn.mp3";
 import laguDua from "@/assets/music/moonlightReprise.mp3";
 import laguTiga from "@/assets/music/divider.mp3";
 import { Button } from "@/components/ui/button";
-import { Pause, Play, SkipBack, SkipForward } from "lucide-react";
-import { Progress } from "@/components/ui/progress";
+import {
+  AudioLines,
+  Pause,
+  Play,
+  Repeat,
+  Shuffle,
+  SkipBack,
+  SkipForward,
+} from "lucide-react";
 
 // Helper function to format time in MM:SS
 const formatTime = (time: number) => {
@@ -21,23 +28,27 @@ const Music: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [volume, setVolume] = useState(50); // Volume state from 0 to 100
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0); // State for current track
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+  const [isShuffle, setIsShuffle] = useState(false);
+  const [isRepeat, setIsRepeat] = useState(false);
 
   const allMusics = [
     {
       id: 1,
       name: "Bethoven",
+      genre: "Klasik",
       url: laguPertama,
     },
     {
       id: 2,
       name: "Moonlight Reprise",
+      genre: "Ambient",
       url: laguDua,
     },
     {
       id: 3,
       name: "Divider",
+      genre: "New Age",
       url: laguTiga,
     },
   ];
@@ -45,28 +56,34 @@ const Music: React.FC = () => {
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.src = allMusics[currentTrackIndex].url;
+      audioRef.current.load();
       if (isPlaying) {
         audioRef.current.play();
-      } else {
-        audioRef.current.pause();
       }
     }
-  }, [currentTrackIndex, isPlaying]);
+  }, [currentTrackIndex]);
 
-  const togglePlayPause = () => {
+  useEffect(() => {
     if (audioRef.current) {
       if (isPlaying) {
-        audioRef.current.pause();
-      } else {
         audioRef.current.play();
+      } else {
+        audioRef.current.pause();
       }
-      setIsPlaying(!isPlaying);
     }
+  }, [isPlaying]);
+
+  const togglePlayPause = () => {
+    setIsPlaying(!isPlaying);
   };
 
   const handleTimeUpdate = () => {
     if (audioRef.current) {
       setCurrentTime(audioRef.current.currentTime);
+      updateSliderBackground(
+        audioRef.current.currentTime,
+        audioRef.current.duration
+      );
     }
   };
 
@@ -76,16 +93,18 @@ const Music: React.FC = () => {
     }
   };
 
-  const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newVolume = Number(event.target.value);
-    setVolume(newVolume);
-    if (audioRef.current) {
-      audioRef.current.volume = newVolume / 100; // HTMLAudioElement volume property ranges from 0.0 to 1.0
-    }
-  };
-
   const handleNext = () => {
-    setCurrentTrackIndex((prevIndex) => (prevIndex + 1) % allMusics.length);
+    setCurrentTrackIndex((prevIndex) => {
+      let nextIndex;
+      if (isShuffle) {
+        do {
+          nextIndex = Math.floor(Math.random() * allMusics.length);
+        } while (nextIndex === prevIndex);
+      } else {
+        nextIndex = (prevIndex + 1) % allMusics.length;
+      }
+      return nextIndex;
+    });
   };
 
   const handlePrev = () => {
@@ -100,66 +119,121 @@ const Music: React.FC = () => {
   };
 
   const handleTrackEnd = () => {
-    handleNext();
+    if (isRepeat && audioRef.current) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.play();
+    } else {
+      handleNext();
+    }
+  };
+
+  const toggleShuffle = () => {
+    setIsShuffle(!isShuffle);
+  };
+
+  const toggleRepeat = () => {
+    setIsRepeat(!isRepeat);
+  };
+
+  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = Number(e.target.value);
+      setCurrentTime(Number(e.target.value));
+      updateSliderBackground(Number(e.target.value), audioRef.current.duration);
+    }
+  };
+
+  const updateSliderBackground = (current: number, duration: number) => {
+    const percentage = (current / duration) * 100;
+    const slider = document.querySelector(
+      'input[type="range"]'
+    ) as HTMLInputElement;
+    if (slider) {
+      slider.style.setProperty("--slider-progress", `${percentage}%`);
+    }
   };
 
   return (
     <MainLayout>
       <div className="p-3 px-10">
-        <h1 className="text-3xl font-bold mb-2">Entertainment</h1>
-        <div className="bg-gray-50 w-full p-3 mb-5 text-primary rounded-md">
-          <h1 className="text-3xl font-bold mb-2">Musik</h1>
-          <ul className="list-decimal ml-5">
-            {allMusics.map((music, index) => (
-              <li
-                key={music.id}
-                className={`mb-2 underline underline-offset-2 font-semibold text-md cursor-pointer ${
-                  index === currentTrackIndex ? "text-blue-600" : ""
-                }`}
-                onClick={() => handleMusicClick(index)}
-              >
-                <p>{music.name}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
         <audio
           ref={audioRef}
           src={allMusics[currentTrackIndex].url}
           onTimeUpdate={handleTimeUpdate}
           onLoadedMetadata={handleLoadedMetadata}
-          onEnded={handleTrackEnd} // Handle track end
+          onEnded={handleTrackEnd}
         />
         <div className="flex items-center flex-col-reverse">
-          <div className="flex items-center space-x-2 mt-5">
-            <Button onClick={handlePrev} className="rounded-md">
-              <SkipBack />
+          <div className="flex items-center justify-between mt-1 w-full">
+            <Button
+              onClick={toggleShuffle}
+              className={`bg-transparent ${isShuffle ? "text-blue-600" : ""}`}
+            >
+              <Shuffle />
             </Button>
-            <Button onClick={togglePlayPause} className="rounded-md">
-              {isPlaying ? <Pause size={20} /> : <Play size={20} />}
-            </Button>
-            <Button onClick={handleNext} className="rounded-md">
-              <SkipForward />
+            <div className="flex items-center gap-2">
+              <Button
+                onClick={handlePrev}
+                className="rounded-md bg-transparent"
+              >
+                <SkipBack />
+              </Button>
+              <Button
+                onClick={togglePlayPause}
+                className="rounded-full p-1 w-20 h-20"
+              >
+                {isPlaying ? <Pause size={35} /> : <Play size={35} />}
+              </Button>
+              <Button
+                onClick={handleNext}
+                className="rounded-md bg-transparent"
+              >
+                <SkipForward />
+              </Button>
+            </div>
+            <Button
+              onClick={toggleRepeat}
+              className={`bg-transparent ${isRepeat ? "text-blue-600" : ""}`}
+            >
+              <Repeat />
             </Button>
           </div>
-          <div className="flex items-center">
-            <label htmlFor="volume-slider" className="mr-2">
-              Volume
-            </label>
-            <input
-              id="volume-slider"
-              type="range"
-              min="0"
-              max="100"
-              value={volume}
-              onChange={handleVolumeChange}
-              className="w-40"
-            />
+          <div className="flex items-center justify-between w-full">
+            <span>{formatTime(currentTime)}</span>
+            <span>{formatTime(duration)}</span>
           </div>
-          <Progress value={currentTime} max={duration} className="w-3/4 my-2" />
-          <div>
-            {formatTime(currentTime)} / {formatTime(duration)}
+          <input
+            type="range"
+            value={currentTime}
+            max={duration}
+            onChange={handleSliderChange}
+            className="w-full bg-primary mb-3"
+          />
+          <div className="my-5">
+            <h1 className="text-3xl font-bold text-center">
+              {allMusics[currentTrackIndex].name}
+            </h1>
+            <p className="text-center text-sm text-gray-300">
+              Genre Musik - {allMusics[currentTrackIndex].genre}
+            </p>
           </div>
+        </div>
+        <div className="bg-gray-50 w-full p-3 mb-5 text-primary rounded-md mt-5">
+          <h1 className="text-3xl font-bold mb-2">Playlist</h1>
+          <ul className="list-decimal ">
+            {allMusics.map((music, index) => (
+              <li
+                key={music.id}
+                className={`mb-2 underline underline-offset-2 font-semibold text-md cursor-pointer flex justify-between ${
+                  index === currentTrackIndex ? "text-blue-600" : ""
+                }`}
+                onClick={() => handleMusicClick(index)}
+              >
+                <p>{music.name}</p>
+                {index === currentTrackIndex && <AudioLines />}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </MainLayout>

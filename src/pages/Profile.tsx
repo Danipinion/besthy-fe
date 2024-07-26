@@ -125,7 +125,7 @@ const Profile = () => {
           </div>
           <div className="w-4/5">
             <Dialog>
-              <DialogTrigger className="bg-primary w-full py-2 rounded-md">
+              <DialogTrigger className="bg-primary w-full py-2 rounded-md mt-2">
                 Update Profile
               </DialogTrigger>
               <DialogContent>
@@ -176,11 +176,11 @@ const Profile = () => {
               </DialogContent>
             </Dialog>
 
-            <Button onClick={handleLogout} className="mt-5 w-full">
+            <Button onClick={handleLogout} className=" w-full mt-2">
               Logout
             </Button>
-            <Link to={"/about"} className="mt-5">
-              <p className="mt-10 text-center font-light hover:underline">
+            <Link to={"/about"} className="">
+              <p className=" mt-3 mb-10 text-center font-light hover:underline">
                 About us
               </p>
             </Link>
