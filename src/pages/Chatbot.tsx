@@ -4,7 +4,7 @@ const Chatbot = () => {
   return (
     <div>
       <iframe
-        src="http://103.247.12.9:3000/chatbot/a50759ea-9d7e-49fc-932e-3a0d144dc7d5"
+        src="https://5546-103-247-12-10.ngrok-free.app/chatbot/a50759ea-9d7e-49fc-932e-3a0d144dc7d5"
         frameBorder="0"
         className="w-full h-screen"
       ></iframe>
