@@ -1,4 +1,4 @@
-import { Disc3 } from "lucide-react";
+import { Music } from 'lucide-react';
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -7,7 +7,7 @@ const Navbar = () => {
       <div className="flex items-center justify-between w-full h-full px-5">
         <div></div>
         <Link to={"/user/musik"}>
-          <Disc3 />
+          <Music />
         </Link>
       </div>
     </nav>
